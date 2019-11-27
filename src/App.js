@@ -16,10 +16,7 @@ class App extends React.Component {
     }
     handleClick = () => {
         if(this.state.text){
-            let tasks = this.state.tasks;
-            let text = this.state.text;
-            tasks.push(text);
-            this.setState({tasks:tasks});
+            this.setState({tasks:[...this.state.tasks,this.state.text]});
             this.setState({text:''});
         }
         else{
