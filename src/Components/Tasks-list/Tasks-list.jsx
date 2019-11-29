@@ -6,13 +6,11 @@ class TasksList extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            tasks:[]
+            tasks:this.props.tasks
         }
     }
     filterTasks = index => {
-        const tasks = this.props.tasks;
-        let filtredTasks = tasks.splice(index,1);
-        this.setState({tasks:filtredTasks});
+        this.setState({tasks:this.props.tasks.splice(index,1)});
     }
     render(){
         return (

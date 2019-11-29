@@ -9,28 +9,30 @@ class Task extends React.Component{
         super(props);
         this.state = {
             editable:false,
-            task:this.props.task
+            task:this.props.task.text,
+            time:this.props.task.time
         }
     }
     changeState = () => {
-        this.setState({editable:true});
+        this.setState({editable:true},()=>{console.log('state change to' + this.state.editable);});
     }
     handleChange = value => {
         this.setState({task:value});
     }
-    confirmMod = () => {
-        this.setState({editable:false});
+    confirmMod = (time,task) => {
+        this.setState({editable:false,time:time,task:task});
     }
     cancelMod = () => {
-        this.setState({editable:false,task:this.props.task});
+        this.setState({editable:false});
+        console.log('editable changed');
     }
     render(){
         let paragraph;
         if(this.state.editable){
-            paragraph = <EditTrue value={this.state.task} index={this.props.index} handleChange={this.handleChange} confirmMod={this.confirmMod} cancelMod={this.cancelMod}/>;
+            paragraph = <EditTrue value={this.state.task} time={this.state.time} index={this.props.index} handleChange={this.handleChange} confirmMod={this.confirmMod} cancelMod={this.cancelMod}/>;
         }
         else{
-            paragraph = <EditFalse value={this.state.task} changeState={this.changeState} filterTasks={this.props.filterTasks} index={this.props.index}/>;
+            paragraph = <EditFalse value={this.state.task} time={this.state.time} changeState={this.changeState} filterTasks={this.props.filterTasks} index={this.props.index}/>;
         }
         return (
             <div>
