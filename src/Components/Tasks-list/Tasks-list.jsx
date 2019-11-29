@@ -9,12 +9,22 @@ class TasksList extends React.Component{
             tasks:this.props.tasks
         }
     }
+    static getDerivedStateFromProps(nextProps,prevState){
+        if(nextProps.tasks !== prevState.tasks){
+            return {
+                tasks:nextProps.tasks
+            };
+        }
+        return null;
+    }
     filterTasks = index => {
-        this.setState({tasks:this.props.tasks.splice(index,1)});
+        this.state.tasks.splice(index,1);
+        this.setState({tasks:this.state.tasks});
+        console.log(this.state.tasks)
     }
     render(){
         return (
-            <div className='task-list'>{this.props.tasks.map((task,index) => {
+            <div className='task-list'>{this.state.tasks.map((task,index) => {
                     return <Task task={task} key={index} index={index} filterTasks={this.filterTasks}/>
                 })}</div>
         )

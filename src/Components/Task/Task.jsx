@@ -14,17 +14,13 @@ class Task extends React.Component{
         }
     }
     changeState = () => {
-        this.setState({editable:true},()=>{console.log('state change to' + this.state.editable);});
-    }
-    handleChange = value => {
-        this.setState({task:value});
+        this.setState({editable:true});
     }
     confirmMod = (time,task) => {
         this.setState({editable:false,time:time,task:task});
     }
     cancelMod = () => {
         this.setState({editable:false});
-        console.log('editable changed');
     }
     render(){
         let paragraph;

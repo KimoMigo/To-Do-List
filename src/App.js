@@ -17,9 +17,9 @@ class App extends React.Component {
     }
     handleClick = () => {
         if(this.state.text){
-            this.setState({tasks:[...this.state.tasks,{text:this.state.text,time:this.state.time}]});
+            this.setState((state,props)=>{return {tasks:[...state.tasks,{text:state.text,time:state.time}]}});
             this.setState({text:''});
-            console.log(this.state.text);
+            console.log(this.state.tasks)
         }
         else{
             alert('Please fill a task')
