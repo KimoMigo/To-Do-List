@@ -20,12 +20,12 @@ class TasksList extends React.Component{
     filterTasks = index => {
         this.state.tasks.splice(index,1);
         this.setState({tasks:this.state.tasks});
-        console.log(this.state.tasks)
     }
     render(){
+        let sortedTableByDate = this.state.tasks.sort((task1,task2)=>task1.date-task2.date)
         return (
-            <div className='task-list'>{this.state.tasks.map((task,index) => {
-                    return <Task task={task} key={index} index={index} filterTasks={this.filterTasks}/>
+            <div className='task-list'>{sortedTableByDate.map((task,index) => {
+                    return <Task task={task} key={task.timeStamp} index={index} filterTasks={this.filterTasks} updateTask={this.props.updateTask}/>
                 })}</div>
         )
     }

@@ -1,16 +1,16 @@
 import React from 'react';
-import TimePicker from 'react-time-picker';
+import DateTimePicker from 'react-datetime-picker';
 
 class EditTrue extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            time:this.props.time,
+            date:this.props.date,
             task:this.props.value
         }
     }
-    timeChange = time => {
-        this.setState({time:time});    
+    dateChange = date => {
+        this.setState({date:date});    
     }
     taskChange = evt => {
         this.setState({task:evt.target.value});
@@ -19,8 +19,9 @@ class EditTrue extends React.Component{
         return (
                 <div className='task'>
                     <input type="text" value={this.state.task} autoFocus={true} onChange={e =>this.taskChange(e)}/>
-                    <TimePicker value={this.state.time} onChange={this.timeChange}/>
-                    <button onClick={()=>this.props.confirmMod(this.state.time,this.state.task)}>Confirm</button>
+                    <DateTimePicker value={this.state.date} onChange={this.dateChange}/>
+                    <button onClick={()=>{this.props.updateTask(this.state.date,this.state.task,this.props.index);
+                                         this.props.confirmMod();}}>Confirm</button>
                     <button onClick={this.props.cancelMod}>Cancel</button>
                 </div>
             );
